@@ -1,0 +1,164 @@
+$primary-color: #143D60;
+$secondary-color: #27667B;
+$background-light: #ffffff;
+$background-dark: #1a1a1a;
+$text-light: #333333;
+$text-dark: #ffffff;
+@import url('https://free.bboxtype.com/embedfonts/?family=FiraGO:400,700');
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin responsive($breakpoint) {
+  @if $breakpoint == tablet {
+    @media screen and (min-width: 768px) { @content; }
+  }
+  @if $breakpoint == desktop {
+    @media screen and (min-width: 1024px) { @content; }
+  }
+}
+
+   [data-theme='light'] {
+     --background: #{$background-light};
+     --text: #{$text-light};
+   }
+
+[data-theme='dark'] {
+  --background: #{$background-dark};
+  --text: #{$text-dark};
+}
+  *{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+   body {
+     background-color: var(--background);
+     color: var(--text);
+     transition: all 0.3s ease;
+     font-family: 'FiraGO', -apple-system, BlinkMacSystemFont, sans-serif;
+   }
+
+   .header {
+     padding: 1rem 2rem;
+     background-color: $primary-color;
+     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+nav {
+  @include flex-center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+
+a {
+  color: white;
+  text-decoration: none;
+  transition: opacity 0.2s;
+
+&:hover {
+   opacity: 0.8;
+ }
+}
+}
+
+.theme-toggle {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: background-color 0.2s;
+
+&:hover {
+   background-color: rgba(255, 255, 255, 0.1);
+ }
+}
+}
+
+   .products-grid {
+     display: grid;
+     gap: 1.5rem;
+     padding: 2rem;
+
+@include responsive(tablet) {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+@include responsive(desktop) {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.product-card {
+  padding: 1.5rem;
+  border-radius: 8px;
+  background-color: $secondary-color;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+
+&:hover {
+   transform: translateY(-4px);
+ }
+
+h2 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.price {
+  font-weight: bold;
+  font-size: 1.125rem;
+}
+}
+}
+
+.home {
+  .hero {
+    @include flex-center;
+    flex-direction: column;
+    min-height: 60vh;
+    text-align: center;
+    background: linear-gradient($secondary-color, $primary-color);
+    background-size: cover;
+    color: white;
+
+    h1 { font-size: 2.5rem; }
+    p { font-size: 1.2rem; }
+  }
+
+  .features {
+    display: grid;
+    gap: 2rem;
+    padding: 4rem 2rem;
+    @include responsive(tablet) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+}
+
+.about {
+  padding: 4rem 2rem;
+
+  .about-content {
+    max-width: 800px;
+    margin: 0 auto;
+
+    .about-info {
+      display: grid;
+      gap: 2rem;
+      margin-top: 2rem;
+      @include responsive(tablet) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  }
+}
